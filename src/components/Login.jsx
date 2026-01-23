@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
+import { CheckValidData } from "../utils/Validate";
 
 const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+ const[errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
-    const [isSignInForm, setIsSignInForm] = useState(true);
 
-   const toggleSignIn = ()=>{
-  setIsSignInForm(!isSignInForm);
+  const HandleButtonClick = () => {
 
-   } 
+    const message = CheckValidData(email.current.value,password.current.value);
+    setErrorMessage(message);
+
+    console.log(email.current.value);
+    console.log(password.current.value);
+
+    console.log(message);
+  };
+
+  const toggleSignIn = () => {
+    setIsSignInForm(!isSignInForm);
+  };
   return (
     <div>
       <Header />
@@ -18,14 +32,51 @@ const Login = () => {
           alt="bg-img"
         />
       </div>
-      <form className="absolute bg-black w-3/12 my-36 mx-auto right-0 left-0 text-white  p-12 opacity-90 ">
-        <h1 className="font-bold text-3xl">{isSignInForm? "Sign In" : "Sign Up"}</h1>
-        {!isSignInForm &&  <input type="text" placeholder="Full Name" className="p-4 my-4 w-full bg-gray-700"/>}
-        <input type="text" placeholder="Email Address" className="p-4 my-4 w-full bg-gray-700"/>
-        <input type="password" placeholder="Password" className="p-4 my-4 w-full bg-gray-700"/>
-         {!isSignInForm &&  <input type="number" placeholder="Phone Number" className="p-4 my-4 w-full bg-gray-700"/>}
-        <button className="p-4 my-6 w-full bg-red-700 ">{isSignInForm? "Sign In" : "Sign Up"}</button>
-        <p className="py-4 cursor-pointer" onClick={toggleSignIn} >{isSignInForm? "New to NetFlix? Sign Up" : "Already Signedup? Sign In"}</p>
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute bg-black w-3/12 my-36 mx-auto right-0 left-0 text-white  p-12 opacity-90 "
+      >
+        <h1 className="font-bold text-3xl">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h1>
+        {!isSignInForm && (
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="p-4 my-4 w-full bg-gray-700"
+          />
+        )}
+        <input
+          ref={email}
+          type="text"
+          placeholder="Email Address"
+          className="p-4 my-4 w-full bg-gray-700"
+        />
+        <input
+          ref={password}
+          type="password"
+          placeholder="Password"
+          className="p-4 my-4 w-full bg-gray-700"
+        />
+        {!isSignInForm && (
+          <input
+            type="number"
+            placeholder="Phone Number"
+            className="p-4 my-4 w-full bg-gray-700"
+          />
+        )}
+        <p className="text-red-600 p-1">{errorMessage}</p>
+        <button
+          onClick={HandleButtonClick}
+          className="p-4 my-6 w-full bg-red-700 "
+        >
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </button>
+        <p className="py-4 cursor-pointer" onClick={toggleSignIn}>
+          {isSignInForm
+            ? "New to NetFlix? Sign Up"
+            : "Already Signedup? Sign In"}
+        </p>
       </form>
     </div>
   );
