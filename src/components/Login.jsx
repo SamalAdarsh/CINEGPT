@@ -1,25 +1,61 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { CheckValidData } from "../utils/Validate";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
- const[errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const number = useRef(null);
-
+  //   const number = useRef(null);
 
   const HandleButtonClick = () => {
-
-    const message = CheckValidData(name.current.value,email.current.value,password.current.value,number.current.value);
+    const message = CheckValidData(
+      name.current?.value,
+      email.current?.value,
+      password.current?.value,
+    );
     setErrorMessage(message);
 
-    console.log(email.current.value);
-    console.log(password.current.value);
+    if (message) return;
 
-    console.log(message);
+    if (!isSignInForm) {
+    
+      createUserWithEmailAndPassword(auth, email.current?.value, password.current?.value)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    }
+
+    else{
+
+signInWithEmailAndPassword(auth, email.current?.value, password.current?.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
+
+    }
   };
 
   const toggleSignIn = () => {
@@ -43,7 +79,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
-           ref={name}
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-700"
@@ -61,14 +97,14 @@ const Login = () => {
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-700"
         />
-        {!isSignInForm && (
+        {/* {!isSignInForm && (
           <input
           ref={number}
             type="number"
             placeholder="Phone Number (10-digit)"
             className="p-4 my-4 w-full bg-gray-700"
           />
-        )}
+        )} */}
         <p className="text-red-600 p-1">{errorMessage}</p>
         <button
           onClick={HandleButtonClick}
