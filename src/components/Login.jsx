@@ -7,11 +7,13 @@ const Login = () => {
  const[errorMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
+  const number = useRef(null);
 
 
   const HandleButtonClick = () => {
 
-    const message = CheckValidData(email.current.value,password.current.value);
+    const message = CheckValidData(name.current.value,email.current.value,password.current.value,number.current.value);
     setErrorMessage(message);
 
     console.log(email.current.value);
@@ -41,6 +43,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
+           ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-700"
@@ -60,8 +63,9 @@ const Login = () => {
         />
         {!isSignInForm && (
           <input
+          ref={number}
             type="number"
-            placeholder="Phone Number"
+            placeholder="Phone Number (10-digit)"
             className="p-4 my-4 w-full bg-gray-700"
           />
         )}
