@@ -20,3 +20,4 @@ Creating Movie Suggestion Website
 -> Bug Fix: 
            - Sign up user's displayName & photoURL update
            - If user logged in redirect login page to browse page and vice-versa.
+-> Unsubcribed to OnAuthStateChanged callback function
