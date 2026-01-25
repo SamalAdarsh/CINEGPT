@@ -1,13 +1,19 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { CheckValidData } from "../utils/Validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -24,12 +30,38 @@ const Login = () => {
     if (message) return;
 
     if (!isSignInForm) {
-    
-      createUserWithEmailAndPassword(auth, email.current?.value, password.current?.value)
+      createUserWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value,
+      )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/217961734?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                }),
+              );
+
+              navigate("/browse");
+            })
+
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+
           // ...
         })
         .catch((error) => {
@@ -38,23 +70,23 @@ const Login = () => {
           setErrorMessage(errorCode + "-" + errorMessage);
           // ..
         });
-    }
-
-    else{
-
-signInWithEmailAndPassword(auth, email.current?.value, password.current?.value)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrorMessage(errorCode + "-" + errorMessage);
-  });
-
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value,
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     }
   };
 
