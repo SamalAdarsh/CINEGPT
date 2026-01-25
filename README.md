@@ -17,3 +17,6 @@ Creating Movie Suggestion Website
 -> Created Redux Store using userSlice
 -> Implemented SignOut
 -> Update Profile
+-> Bug Fix: 
+           - Sign up user's displayName & photoURL update
+           - If user logged in redirect login page to browse page and vice-versa.
