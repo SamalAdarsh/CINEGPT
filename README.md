@@ -21,3 +21,4 @@ Creating Movie Suggestion Website
            - Sign up user's displayName & photoURL update
            - If user logged in redirect login page to browse page and vice-versa.
 -> Unsubcribed to OnAuthStateChanged callback function
+-> Added harcorded values to constant files.
