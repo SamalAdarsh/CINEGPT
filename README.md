@@ -22,3 +22,5 @@ Creating Movie Suggestion Website
            - If user logged in redirect login page to browse page and vice-versa.
 -> Unsubcribed to OnAuthStateChanged callback function
 -> Added harcorded values to constant files.
+-> Registered in TMDB & Created an App & Got Access Token
+-> Got data from TMDB now playing movies list only.
