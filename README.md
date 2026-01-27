@@ -24,3 +24,11 @@ Creating Movie Suggestion Website
 -> Added harcorded values to constant files.
 -> Registered in TMDB & Created an App & Got Access Token
 -> Got data from TMDB now playing movies list only.
+-> Custom Hook for NowPlayingMovies.
+-> Created movieSlice
+-> Updated store with Movie Data
+-> Planning for Main Container & Secondary Container
+-> Fetched data for trailer video
+-> Updated store with updated trailer video data
+-> Embedded YT video made it autoplay and mute
+-> Used Tailwind CSS to make main container look awesome

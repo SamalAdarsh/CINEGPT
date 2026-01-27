@@ -51,7 +51,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-linear-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-screen px-8 py-2 bg-linear-to-b from-black/80 to-transparent z-10 flex justify-between">
       <img
         className="w-64"
         src={LOGO_URL}
