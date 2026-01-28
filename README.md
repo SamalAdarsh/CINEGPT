@@ -32,3 +32,4 @@ Creating Movie Suggestion Website
 -> Updated store with updated trailer video data
 -> Embedded YT video made it autoplay and mute
 -> Used Tailwind CSS to make main container look awesome
+-> Build Secondary container/component
