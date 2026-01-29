@@ -3,17 +3,18 @@ import useMovieTrailer from "../hooks/useMovieTrailer";
 
 const VideoBackground = ({ movieID }) => {
   //   const [trailerId, setTrailerId] = useState(null);
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+  const trailerV = useSelector((store) => store.movies?.trailerVideo);
 
   useMovieTrailer({ movieID });
 
   return (
     <div>
       <iframe
-      className="w-screen aspect-video"
-        src={
-          "https://www.youtube.com/embed/yeR5bcbRPak?si=SQJTxZmiRvgmJpbo" +
-          trailerVideo?.key + "?&autoplay=1&mute=1"
+      className="w-screen aspect-video scale-135"
+      src={
+          "https://www.youtube.com/embed/" +
+          trailerV?.key +
+          "?&autoplay=1&mute=1&loop=1" 
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

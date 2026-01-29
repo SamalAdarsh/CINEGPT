@@ -33,3 +33,8 @@ Creating Movie Suggestion Website
 -> Embedded YT video made it autoplay and mute
 -> Used Tailwind CSS to make main container look awesome
 -> Build Secondary container/component
+-> Built Movie List
+-> Built Movie Card
+-> TMDB Poster CDN URL
+-> Fetched API for respective movie lists.
+-> Created custom hooks for those movie lists.
