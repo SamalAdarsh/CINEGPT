@@ -38,3 +38,11 @@ Creating Movie Suggestion Website
 -> TMDB Poster CDN URL
 -> Fetched API for respective movie lists.
 -> Created custom hooks for those movie lists.
+
+
+
+# Things we can improve:
+
+-> add different bg for GPT Search
+-> chnage color of Home
+-> add a slid button on movie list.

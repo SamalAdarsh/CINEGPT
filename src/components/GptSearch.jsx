@@ -4,6 +4,8 @@ import GptSearchBar from './GptSearchBar'
 import { BG_URL } from '../utils/constants'
 
 const GptSearch = () => {
+
+
   return (
     <div>
 

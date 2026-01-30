@@ -4,13 +4,15 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO_URL } from "../utils/constants";
+import { LOGO_URL, SUPPORTED_LANGUAGE } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const ShowGptSearchButton = useSelector((store => store.gpt.ShowGptSearch))
 
   const handleSignOut = () => {
     signOut(auth)
@@ -22,12 +24,15 @@ const Header = () => {
       });
   };
 
-  const handleGptSearchClick = ()=>{
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
 
-dispatch(toggleGptSearchView());
+  const handleLanguageClick = (e)=>{
 
-  }
-
+    // console.log(e.target.value);
+    dispatch(changeLanguage(e.target.value))
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -59,8 +64,21 @@ dispatch(toggleGptSearchView());
 
       {user && (
         <div className="flex p-2 items-center gap-2">
+          {ShowGptSearchButton && <select className="bg-gray-500 text-white p-2 m-2" onChange={handleLanguageClick}>
+            {/* <option value="english">English</option>
+             <option value="hindi">Hindi</option>
+            <option value="spanish">Spanish</option> */}
 
-          <button className="bg-[#15997C] text-white px-4 py-2 rounded-lg font-bold mx-4 cursor-pointer" onClick={handleGptSearchClick}> GPT Search</button>
+            {SUPPORTED_LANGUAGE.map(language => <option key={language.identifier} value={language.identifier}>{language.name}</option> )}
+           
+          </select>}
+          <button
+            className="bg-[#15997C] text-white px-4 py-2 rounded-lg font-bold mx-4 cursor-pointer"
+            onClick={handleGptSearchClick}
+          >
+            {ShowGptSearchButton? "Home" : "  GPT Search"}
+          
+          </button>
           <img
             className="w-12 h-12 rounded-lg"
             // src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
