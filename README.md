@@ -51,3 +51,6 @@ Creating Movie Suggestion Website
 -> add a slid button on movie list
 -> Shimmer UI for gpt search page.
 -> Custom Hooks for fetch
+-> ClearSlice for GPT Search page.
+-> If we click any movie, show the trailer , movie description and actors,
+-> Filter while searching
