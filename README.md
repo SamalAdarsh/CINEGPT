@@ -38,6 +38,9 @@ Creating Movie Suggestion Website
 -> TMDB Poster CDN URL
 -> Fetched API for respective movie lists.
 -> Created custom hooks for those movie lists.
+-> GPT search Page
+-> GPT Search Bar
+-> Made GPT Search Page Multi-Lingual
 
 
 
@@ -45,4 +48,6 @@ Creating Movie Suggestion Website
 
 -> add different bg for GPT Search
 -> chnage color of Home
--> add a slid button on movie list.
+-> add a slid button on movie list
+-> Shimmer UI for gpt search page.
+-> Custom Hooks for fetch

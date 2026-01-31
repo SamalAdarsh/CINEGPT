@@ -1,8 +1,12 @@
-/* eslint-disable no-undef */
-import OpenAI from 'openai';
 
-// eslint-disable-next-line no-unused-vars
-const client = new OpenAI({
-  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+import OpenAI from 'openai';
+import { OPENAI_API_KEY } from './constants';
+
+
+const openai = new OpenAI({
+ apiKey: OPENAI_API_KEY, // This is the default and can be omitted
+
+ dangerouslyAllowBrowser: true,
 });
 
+export default openai;

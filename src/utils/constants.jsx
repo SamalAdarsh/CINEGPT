@@ -25,3 +25,5 @@ export const SUPPORTED_LANGUAGE = [
 ];
 
 
+export const OPENAI_API_KEY = "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";
+
