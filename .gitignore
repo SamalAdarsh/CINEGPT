@@ -24,3 +24,5 @@ openAIApiKey
 *.njsproj
 *.sln
 *.sw?
+
+.env
