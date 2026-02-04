@@ -1,9 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import {  addPopularMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const usePopularMovies = ()=>{
+
+const PopularMovies = useSelector((store) => store.movies.PopularMovies)
 
 const dispatch = useDispatch();
 
@@ -21,7 +23,7 @@ const dispatch = useDispatch();
   };
 
   useEffect(() => {
-    getPopularMovies();
+    !PopularMovies &&  getPopularMovies();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
