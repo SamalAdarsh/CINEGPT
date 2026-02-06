@@ -59,11 +59,11 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-full px-8 py-2 bg-linear-to-b from-black to-transparent z-50 flex flex-col items-center md:flex-row md:justify-between ">
-      <img className="w-64 mx-auto md:mx-0" src={LOGO_URL} alt="logo" />
+   <div className="absolute w-full px-8 py-2 bg-linear-to-b from-black to-transparent z-50  flex flex-col md:flex-row justify-center md:justify-between ">
+      <img className="w-46 md:w-54 mx-auto md:mx-0" src={LOGO_URL} alt="logo" />
 
       {user && (
-        <div className="flex p-2 items-center gap-2">
+        <div className="flex p-2 justify-between md:items-center  gap-2">
           {ShowGptSearchButton && <select className="bg-gray-500 text-white p-2 m-2" onChange={handleLanguageClick}>
             {/* <option value="english">English</option>
              <option value="hindi">Hindi</option>
@@ -73,12 +73,13 @@ const Header = () => {
            
           </select>}
           <button
-            className="bg-[#15997C] text-white px-4 py-2 rounded-lg font-bold mx-4 cursor-pointer"
+            className="bg-[#15997C] text-white w-28 h-12 md:w-auto py-1 md:px-4  md:py-2 rounded-lg font-bold mx-4 cursor-pointer"
             onClick={handleGptSearchClick}
           >
             {ShowGptSearchButton? "Home" : "  GPT Search"}
           
           </button>
+          <div>
           <img
             className="w-12 h-12 rounded-lg"
             // src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
@@ -91,6 +92,7 @@ const Header = () => {
           >
             (Sign Out)
           </button>
+          </div>
         </div>
       )}
     </div>

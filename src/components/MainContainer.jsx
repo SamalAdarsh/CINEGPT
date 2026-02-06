@@ -16,7 +16,7 @@ if(!movies) return null;
  const {original_title, overview, id} = mainMovie
 
   return (
-    <div className="relative w-screen aspect-video bg-black overflow-hidden">
+    <div className="relative w-full h-auto md:aspect-video bg-black overflow-x-hidden pt-[41%] md:pt-0 ">
         <VideoTitle title={original_title} description = {overview} />
         <VideoBackground movieID = {id}/>
     </div>
