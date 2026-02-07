@@ -11,6 +11,7 @@ const gptSlice = createSlice({
         ShowMovieResult : null,
         movieNames: null,
         movieResults: null,
+        showShimmer: false
     },
     reducers:{
 
@@ -27,11 +28,15 @@ const gptSlice = createSlice({
             state.movieResults = movieResults;
         },
 
+        setShimmer: (state, action) => {
+  state.showShimmer = action.payload;
+}
+
     
     }
 })
 
 
-export const {toggleGptSearchView, addGptMovieResult} = gptSlice.actions;
+export const {toggleGptSearchView, addGptMovieResult, setShimmer} = gptSlice.actions;
 
 export default gptSlice.reducer;

@@ -3,10 +3,13 @@ import { lang } from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import openai from "../utils/openAI";
 import { API_OPTIONS } from "../utils/constants";
-import { addGptMovieResult } from "../utils/gptSlice";
+import { addGptMovieResult, setShimmer } from "../utils/gptSlice";
+import GptMovieSuggestions from "./GptMovieSuggestions";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
+
+  const movieNames = useSelector((store) => store.gpt.movieNames);
 
   const searchText = useRef(null);
 
@@ -27,6 +30,8 @@ const GptSearchBar = () => {
 
   const handleGPTSearchClick = async () => {
     console.log(searchText.current.value);
+
+    dispatch(setShimmer(true));
 
     const gptQuery =
       " Act as a movie recommendation system & suggest some movies for the query" +
@@ -51,26 +56,32 @@ const GptSearchBar = () => {
     console.log(tmdbResults);
 
     dispatch(addGptMovieResult({movieNames: gptMovies, movieResults: tmdbResults}));
+
+    dispatch(setShimmer(false));
+    
   };
 
   return (
-    <div className=" pt-[50%] md:pt-[1%] flex justify-center">
-      <form
-        // className="w-11/12 my-[20%]  md:w-1/2 bg-black grid grid-cols-12"
-        className="w-11/12 md:w-1/2 my-[20%] bg-black flex flex-col items-center md:grid md:grid-cols-12 rounded-lg" 
+    
+    <div className={"flex justify-center transition-all duration-500 " + 
+    (movieNames ? "pt-[55%] md:pt-[8%]" : "pt-[75%] md:pt-[20%]")}>
+    
+    <form
+      /* Removed all 'mt' or 'my' classes from here so they don't fight the parent. */
+      className="w-11/12 md:w-1/2 bg-black flex flex-col items-center md:grid md:grid-cols-12 rounded-lg"
+      onSubmit={(e) => e.preventDefault()}
+    >
 
-        onSubmit={(e) => e.preventDefault()}
-      >
         <input
           ref={searchText}
           type="text"
           // className="p-4 m-4 md:col-span-9 col-span-12 bg-white"
-          className="p-4 m-4 w-[90%]  md:col-span-9 bg-white text-black"
+          className="p-4 m-4 w-[90%]  md:col-span-9 bg-white text-black rounded-lg"
           placeholder={lang[langKey].gptSearchPlaceHolder}
         />
         <button
           // className="col-span-6 md:col-span-3  m-4 py-2 px-4 bg-red-600 text-white rounded-lg"
-          className="py-4 md:py-3 px-8 md:px-8 m-4 md:m-6 w-fit md:w-auto  md:col-span-3 bg-red-600 text-white rounded-lg"
+          className="py-4 md:py-3 px-8 md:px-8 m-4 md:m-6 w-fit md:w-auto  md:col-span-3 bg-red-600 hover:bg-red-700 text-white rounded-lg cursor-pointer"
           onClick={handleGPTSearchClick}
         >
           {lang[langKey].search}
