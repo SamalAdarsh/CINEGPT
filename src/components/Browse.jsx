@@ -7,14 +7,21 @@ import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import GptSearch from "./GptSearch";
+import ShimmerHome from "./ShimmerHome";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.ShowGptSearch);
+   const movies = useSelector((store)=>store.movies)
 
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
+
+  if(!movies?.nowPlayingMovies){
+
+    return <ShimmerHome/>
+  }
 
   return (
     <div>
