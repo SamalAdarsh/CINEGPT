@@ -8,7 +8,7 @@ const openai = new OpenAI({
 
  dangerouslyAllowBrowser: true,
 
- baseURL: "http://localhost:5173/api-proxy"
+
 });
 
 export default openai;
