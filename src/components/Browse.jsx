@@ -8,6 +8,7 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import GptSearch from "./GptSearch";
 import ShimmerHome from "./ShimmerHome";
+import TrailerModal from "./TrailerModal";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.ShowGptSearch);
@@ -34,6 +35,7 @@ const Browse = () => {
           <SecondaryContainer />
         </>
       )}
+      <TrailerModal />
     </div>
   );
 };

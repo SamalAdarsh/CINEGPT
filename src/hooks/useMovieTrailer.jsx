@@ -3,7 +3,7 @@ import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
-const useMovieTrailer = ({ movieID }) => {
+const useMovieTrailer = (movieID) => {
   const dispatch = useDispatch();
 
   const TrailerVideo = useSelector((store)=> store.movies.TrailerVideo);
@@ -33,7 +33,8 @@ const useMovieTrailer = ({ movieID }) => {
   };
 
   useEffect(() => {
-   if(!TrailerVideo) getMovieVideos();
+  if(!TrailerVideo) getMovieVideos();
+  // return () => dispatch(addTrailerVideo(null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieID]);
 };
